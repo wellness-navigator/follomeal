@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Follomeal 내 체질에 맞는 식사 기록</title>
+  
+  <!-- 구글 폰트 (Pretendard) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- 아이콘 (Phosphor Icons) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <!-- 방금 첨부해주신 실제 로고 이미지를 'logo.png' 라는 이름으로 현재 폴더에 저장해주세요! -->
+        <img src="logo.png" alt="" class="brand-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'40\'><text x=\'0\' y=\'20\' font-size=\'12\' fill=\'%231A4D2E\'>FolloMeal</text></svg>';" />
+      </div>
+      <div class="logo-area absolute-center">
+        <h1>follomeal</h1>
+        <span class="subtitle">내 체질에 맞는 식사 기록</span>
+      </div>
+      <div class="header-actions">
+        <i class="ph ph-magnifying-glass"></i>
+        <i class="ph ph-bell"></i>
+        <i class="ph ph-list"></i>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-content">
+      
+      <!-- Hero Section (단일 배너) -->
+      <section class="hero-section">
+        <div class="hero-card">
+          <h2 class="hero-title">맞춤 체질 건강관리<br>팔로밀을 시작하세요</h2>
+          <div class="hero-actions">
+            <button class="btn btn-outline">완료 목록</button>
+            <button class="btn btn-primary">새로 만들기</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Menu -->
+      <section class="quick-menu">
+        <div class="menu-item">
+          <div class="icon-wrap"><i class="ph ph-chat-teardrop-text"></i></div>
+          <span>AI챗봇</span>
+        </div>
+        <div class="menu-item">
+          <div class="icon-wrap"><i class="ph ph-aperture"></i></div>
+          <span>AI멀티모달</span>
+        </div>
+        <div class="menu-item">
+          <div class="icon-wrap"><i class="ph ph-book-open"></i></div>
+          <span>레시피</span>
+        </div>
+        <div class="menu-item">
+          <div class="icon-wrap"><i class="ph ph-chart-line-up"></i></div>
+          <span>체질통계</span>
+        </div>
+      </section>
+
+      <!-- 커스텀 배너 (팔로마켓) -->
+      <section class="banner-section">
+        <div class="market-banner">
+          <div class="banner-text">
+            <h3>팔로마켓</h3>
+            <p>내 체질에 딱 맞는 신선 식품 쇼핑하기</p>
+          </div>
+          <i class="ph ph-shopping-cart cart-icon"></i>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <!-- 초기 활성 상태는 홈 -->
+      <div class="nav-item active">
+        <i class="ph-fill ph-house"></i>
+        <span>홈</span>
+      </div>
+      <div class="nav-item">
+        <i class="ph ph-users"></i>
+        <span>커뮤니티</span>
+      </div>
+      <div class="nav-item fab-space"></div>
+      <div class="nav-item">
+        <i class="ph ph-book"></i>
+        <span>8체질 백과</span>
+      </div>
+      <div class="nav-item">
+        <i class="ph ph-user"></i>
+        <span>MY</span>
+      </div>
+      
+      <!-- Center FAB -->
+      <button class="fab-btn" id="fabToggle">
+        <i class="ph ph-plus"></i>
+      </button>
+    </nav>
+
+    <!-- Bottom Sheet Overlay -->
+    <div class="sheet-overlay" id="sheetOverlay"></div>
+    
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet" id="actionSheet">
+      <div class="handle-bar"></div>
+      <div class="sheet-content">
+        <div class="sheet-grid">
+          <div class="sheet-item" id="foodShotBtn">
+            <div class="sheet-icon"><i class="ph ph-camera"></i></div>
+            <span>푸드샷</span>
+          </div>
+          <div class="sheet-item" id="foodSearchBtn">
+            <div class="sheet-icon"><i class="ph ph-magnifying-glass"></i></div>
+            <span>음식 검색</span>
+          </div>
+          <div class="sheet-item">
+            <div class="sheet-icon"><i class="ph ph-scales"></i></div>
+            <span>체중 기록</span>
+          </div>
+          <div class="sheet-item">
+            <div class="sheet-icon"><i class="ph ph-note-pencil"></i></div>
+            <span>컨디션 메모</span>
+          </div>
+          <div class="sheet-item">
+            <div class="sheet-icon"><i class="ph ph-person-simple-run"></i></div>
+            <span>운동 기록</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 푸드샷 결과 모달 (완전 숨김 처리) -->
+    <div class="modal-overlay" id="resultModal" style="display: none;">
+      <div class="modal">
+        <!-- 이모지 기반 렌더링 영역으로 개편 -->
+        <div id="modalEmoji" class="emoji-display">🍔</div>
+
+        <h3 class="modal-title">결과 타이틀 <i class="ph-fill ph-check-circle" style="color:var(--color-primary-green)"></i></h3>
+        <div class="score-circle">
+          <span class="score">0</span>
+          <span class="label">점</span>
+        </div>
+        <p class="modal-desc">결과 설명 영역</p>
+        
+        <div class="expert-card">
+          <div class="expert-title">✨ 전문가 한마디</div>
+          <p class="expert-text">전문가 피드백 영역</p>
+        </div>
+        
+        <!-- 하단 3종 버튼 세로 정렬 -->
+        <div class="modal-buttons">
+          <button class="btn btn-primary" id="btnRecordMeal">식단 기록하기</button>
+          <button class="btn btn-outline" id="btnViewRecipe">레시피 보기</button>
+          <button class="btn btn-outline" id="btnRecommendFood">관련 음식 보기</button>
+          <button class="btn btn-outline modal-close" style="border: none; color: var(--text-muted); margin-top: 4px;">닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 풀스크린 음식 검색 레이어 (최초 숨김) -->
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-header">
+        <button class="icon-btn" id="btnSearchClose"><i class="ph ph-caret-left"></i></button>
+        <div class="search-input-wrap">
+          <input type="text" id="searchInput" placeholder="어떤 음식을 드셨나요? (ex. 사과)" autocomplete="off">
+          <button class="icon-btn" id="btnSearchSubmit"><i class="ph ph-magnifying-glass"></i></button>
+        </div>
+      </div>
+      <div class="search-body">
+        <p class="section-title">추천 검색어</p>
+        <div class="chip-group" id="chipGroup">
+          <button class="chip">사과 🍎</button>
+          <button class="chip">샐러드 🥗</button>
+          <button class="chip">닭가슴살 🍗</button>
+          <button class="chip">아보카도 🥑</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
