@@ -371,6 +371,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // 다중 체질 검색 엔진 (역추적 모드 지원)
     // ==========================================
     
+    // 한국어 단음절 오동작(예: "양" 검색 시 "양배추" 매칭) 방지 헬퍼
+    function isFoodMatch(q, food) {
+        if (q === food) return true;
+        
+        // 1. 검색어가 1글자인 경우
+        if (q.length === 1) {
+            // "파" -> "파스타" (X), "양" -> "양배추", "양고기" (X)
+            // 1글자는 정확히 일치(예: "굴"==="굴")하거나, 괄호 부가설명이 있는 경우만 허용
+            return food === q || food.startsWith(q + "(");
+        }
+        
+        // 2. DB에 있는 음식이 1글자일 경우
+        if (food.length === 1) {
+            // "파"가 DB에 있는데 사용자가 "양파" 검색하면 포함 매칭 방지
+            return false;
+        }
+        
+        // 3. 그 외 2글자 이상은 상호 포함 여부 허용 (예: "돼지고기" -> "돼지", "아메리카노" -> "커피(아메리카노)")
+        return food.includes(q) || q.includes(food);
+    }
+
     function analyzeFood(query) {
         const q = query.trim();
         if(!q) return null;
@@ -385,12 +406,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const arr = currentDB.allowed[category];
                 if (!Array.isArray(arr) && typeof arr === 'object') {
                     for(let subKey in arr) {
-                        if (arr[subKey].some(food => food.includes(q) || q.includes(food))) {
+                        if (arr[subKey].some(food => isFoodMatch(q, food))) {
                             return { status: 'allowed', db: currentDB };
                         }
                     }
                 } else if (Array.isArray(arr)) {
-                    if (arr.some(food => food.includes(q) || q.includes(food))) {
+                    if (arr.some(food => isFoodMatch(q, food))) {
                         return { status: 'allowed', db: currentDB };
                     }
                 }
@@ -401,12 +422,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const arr = currentDB.avoid[category];
                 if (!Array.isArray(arr) && typeof arr === 'object') {
                     for(let subKey in arr) {
-                        if (arr[subKey].some(food => food.includes(q) || q.includes(food))) {
+                        if (arr[subKey].some(food => isFoodMatch(q, food))) {
                             return { status: 'avoid', db: currentDB };
                         }
                     }
                 } else if (Array.isArray(arr)) {
-                    if (arr.some(food => food.includes(q) || q.includes(food))) {
+                    if (arr.some(food => isFoodMatch(q, food))) {
                         return { status: 'avoid', db: currentDB };
                     }
                 }
@@ -425,13 +446,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const arr = db.allowed[category];
                     if (!Array.isArray(arr) && typeof arr === 'object') {
                         for(let subKey in arr) {
-                            if (arr[subKey].some(food => food.includes(q) || q.includes(food))) {
+                            if (arr[subKey].some(food => isFoodMatch(q, food))) {
                                 isAllowed = true;
                                 break;
                             }
                         }
                     } else if (Array.isArray(arr)) {
-                        if (arr.some(food => food.includes(q) || q.includes(food))) {
+                        if (arr.some(food => isFoodMatch(q, food))) {
                             isAllowed = true;
                             break;
                         }
