@@ -138,63 +138,63 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .hero-card {
   background-color: #d9e9e0;
   border-radius: 28px;
-  height: clamp(200px, 40vw, 240px);
+  height: 320px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
-/* 이미지: absolute inset-0, 카드 안에 꽉 차게 */
+/* 이미지: object-cover로 카드에 꽉 채움 */
 .hero-bg-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
 }
-/* 하단 그라디언트 오버레이 */
+/* 하단 그라디언트 오버레이 (레퍼런스 수치 적용) */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255,255,255,0.02) 0%,
-    rgba(9,42,31,0.06) 58%,
-    rgba(7,36,27,0.46) 100%
+    rgba(255,255,255,0.00) 0%,
+    rgba(9,42,31,0.04) 58%,
+    rgba(7,36,27,0.22) 100%
   );
   pointer-events: none;
 }
-/* 하단 텍스트 영역 */
+/* 하단 텍스트 영역: px-8(32px) pb-5(20px) */
 .hero-overlay-text {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 24px 20px;
+  padding: 0 32px 20px;
   z-index: 2;
 }
+/* 두 줄 텍스트 동일 스타일 */
 .hero-overlay-title {
   font-size: 20px;
   font-weight: 800;
-  line-height: 1.34;
+  line-height: 1.28;
   letter-spacing: -0.03em;
   color: #ffffff;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.22);
 }
-.hero-overlay-btn {
-  display: inline-flex;
+.hero-overlay-sub {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.4;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.28;
   letter-spacing: -0.03em;
   color: #ffffff;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.22);
 }
+
 
 .btn {
   padding: 10px 20px;
