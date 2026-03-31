@@ -477,6 +477,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // 앱 전역 헬퍼 및 DOM 맵핑
     // ==========================================
 
+    // 💡 연관 검색어(동의어) 맵핑 엔진
+    function normalizeFoodQuery(q) {
+        const normalized = q;
+        const synonymMap = {
+            "양고기": ["양꼬치", "양갈비", "프렌치랙", "숄더랙", "양고기스튜"],
+            "소고기": ["등심", "안심", "스테이크", "채끝", "우삼겹", "차돌박이", "소갈비", "육회", "꽃등심"],
+            "돼지고기": ["삼겹살", "목살", "항정살", "보쌈", "족발", "베이컨", "제육", "돼지갈비", "돈까스", "수육", "순대국", "돼지"],
+            "닭고기": ["치킨", "닭발", "닭강정", "삼계탕", "찜닭", "닭갈비", "닭도리탕", "통닭"],
+            "오리고기": ["훈제오리", "오리주물럭", "오리로스", "베이징덕"],
+            "우유": ["라떼", "연유", "밀크"],
+            "아메리카노": ["커피", "아아", "뜨아", "에스프레소", "콜드브루"],
+            "밀가루": ["빵", "라면", "국수", "우동", "스파게티", "파스타", "피자", "햄버거", "과자", "케이크", "쿠키", "크로와상", "베이글", "마카롱"],
+            "사과": ["애플", "풋사과"],
+            "토마토": ["방울토마토", "대저토마토", "스테비아토마토"]
+        };
+        
+        for (const [standardFood, aliases] of Object.entries(synonymMap)) {
+            for (const alias of aliases) {
+                if (normalized.includes(alias)) {
+                    return standardFood;
+                }
+            }
+        }
+        return normalized;
+    }
+
     function getEmoji(foodName) {
         const mappings = [
             { keywords: ["소", "스테이크", "사골", "곰탕", "선지", "내장"], emoji: "🥩" },
@@ -587,7 +613,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function executeSearch(query) {
         if(!query || query.trim() === '') return;
         
-        currentSearchedFood = query.trim();
+        // 동의어(연관 검색어) 자동 변환 적용
+        const rawQuery = query.trim();
+        const mappedQuery = normalizeFoodQuery(rawQuery);
+        
+        currentSearchedFood = mappedQuery;
         currentSearchedEmoji = getEmoji(currentSearchedFood);
 
         const result = analyzeFood(currentSearchedFood);
