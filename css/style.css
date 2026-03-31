@@ -16,6 +16,12 @@
   --color-icon-yellow: #facc15; 
   /* 네 번째 이미지의 보라색 컬러 */
   --color-icon-purple: #9900e6; /* 지정해 주신 더 진한 보라색 코드 적용 */
+  
+  /* 레이아웃 제어용 Spacing Tokens */
+  --bottom-nav-height: 70px;
+  --fab-overflow: 24px;
+  --market-fab-gap: 20px;
+  --content-padding-bottom: calc(var(--bottom-nav-height) + var(--fab-overflow) + var(--market-fab-gap));
 }
 
 * {
@@ -31,7 +37,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
@@ -119,7 +125,9 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 /* Main Content */
 .app-content {
   flex: 1;
-  padding-bottom: 90px; 
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(var(--content-padding-bottom) + env(safe-area-inset-bottom));
 }
 
 /* Hero Section */
@@ -198,7 +206,8 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
 /* Banner Section */
 .banner-section {
-  padding: 0 20px 20px;
+  margin-top: auto;
+  padding: 0 20px 0;
 }
 .market-banner {
   background-color: #e2e8f0;
@@ -411,7 +420,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   left: 50%;
   width: 100%;
   max-width: 430px;
-  height: 100%;
+  height: 100dvh;
   background-color: #D6F5F0;
   z-index: 9000;
   display: flex;
@@ -425,20 +434,26 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .search-header {
   display: flex; align-items: center;
   padding: 16px; gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .icon-btn { 
   font-size: 24px; color: var(--text-green); 
   display: flex; justify-content: center; align-items: center; 
+  flex: 0 0 24px;
 }
 .search-input-wrap {
   flex: 1; display: flex; align-items: center;
   background: var(--bg-white);
   border-radius: 20px; padding: 10px 16px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  min-width: 0;
 }
 .search-input-wrap input {
   flex: 1; border: none; outline: none; background: transparent;
   font-size: 15px; color: var(--text-dark); margin-right: 8px;
+  min-width: 0; box-sizing: border-box; padding: 0;
 }
 .search-input-wrap input::placeholder { color: #9ca3af; }
 .search-body { padding: 20px 16px; flex: 1; overflow-y: auto; }
