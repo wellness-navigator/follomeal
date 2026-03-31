@@ -8,12 +8,12 @@
   --text-green: #1a4d2e;
   --text-muted: #6b7280;
   
-  --color-fab: #ffd54f;
+  --color-fab: #fffd37;
   --color-primary-green: #2e7d32;
   --color-hero-bg: #c8e6c9;
   
   /* 세 번째 이미지의 아이콘 스페이스 컬러 (옐로우톤) */
-  --color-icon-yellow: #facc15; 
+  --color-icon-yellow: #fffd37; 
   /* 네 번째 이미지의 보라색 컬러 */
   --color-icon-purple: #9900e6; /* 지정해 주신 더 진한 보라색 코드 적용 */
   
