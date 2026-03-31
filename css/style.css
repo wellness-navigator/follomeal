@@ -132,7 +132,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 
 /* Hero Section */
 .hero-section {
-  padding: 20px;
+  padding: 16px 20px 0;
 }
 .hero-card {
   background-color: var(--bg-white);
@@ -141,18 +141,18 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 .hero-banner-img {
   width: 100%;
   height: auto;
-  object-fit: contain; /* 이미지가 잘리지 않고 전부 다 나오도록 보장 */
-  background-color: #f1f5f9; /* 여백이 생길 경우 연한 회색으로 채움 */
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: block;
+  object-fit: contain;
+  border-radius: 16px 16px 0 0;
 }
 .hero-content {
-  padding: 20px;
+  padding: 16px 20px 20px;
 }
 .hero-title {
   font-size: 20px;
