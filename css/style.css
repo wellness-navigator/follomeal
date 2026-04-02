@@ -135,6 +135,17 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
 .hero-section {
   padding: 20px;
 }
+.hero-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 28px;
+  transition: opacity 0.15s ease;
+}
+.hero-card-link:active {
+  opacity: 0.88;
+}
 .hero-card {
   background-color: #d9e9e0;
   border-radius: 28px;
