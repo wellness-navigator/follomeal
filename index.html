@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Follomeal 내 체질에 맞는 식사 기록</title>
-  
+
   <!-- 구글 폰트 (Pretendard) -->
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <!-- 아이콘 (Phosphor Icons) -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  
+
   <link rel="stylesheet" href="css/style.css?v=4.0" />
 </head>
+
 <body>
   <div class="app-container">
     <!-- Header -->
     <header class="app-header">
       <div class="header-left">
         <!-- 방금 첨부해주신 실제 로고 이미지를 'logo.png' 라는 이름으로 현재 폴더에 저장해주세요! -->
-        <img src="logo.png" alt="" class="brand-logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'40\'><text x=\'0\' y=\'20\' font-size=\'12\' fill=\'%231A4D2E\'>FolloMeal</text></svg>';" />
+        <img src="logo.png" alt="" class="brand-logo"
+          onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'40\'><text x=\'0\' y=\'20\' font-size=\'12\' fill=\'%231A4D2E\'>FolloMeal</text></svg>';" />
       </div>
       <div class="logo-area absolute-center">
-        <h1>follomeal</h1>
+        <h1>8lowmeal</h1>
         <span class="subtitle">내 체질에 맞는 식사 기록</span>
       </div>
       <div class="header-actions">
@@ -33,10 +37,11 @@
 
     <!-- Main Content -->
     <main class="app-content">
-      
+
       <!-- Hero Section (단일 배너) -->
       <section class="hero-section">
-        <a href="https://wellness-8lab.vercel.app/result" target="_blank" rel="noopener noreferrer" class="hero-card-link">
+        <a href="https://wellness-8lab.vercel.app/result" target="_blank" rel="noopener noreferrer"
+          class="hero-card-link">
           <div class="hero-card">
             <img src="images/hero-banner.png" alt="체질 MBTI 히어로 이미지" class="hero-bg-img" draggable="false" />
             <div class="hero-overlay"></div>
@@ -81,7 +86,7 @@
           <i class="ph ph-shopping-cart cart-icon"></i>
         </div>
       </section>
-      
+
     </main>
 
     <!-- Bottom Navigation -->
@@ -104,7 +109,7 @@
         <i class="ph ph-user"></i>
         <span>MY</span>
       </div>
-      
+
       <!-- Center FAB -->
       <button class="fab-btn" id="fabToggle">
         <i class="ph ph-plus"></i>
@@ -113,7 +118,7 @@
 
     <!-- Bottom Sheet Overlay -->
     <div class="sheet-overlay" id="sheetOverlay"></div>
-    
+
     <!-- Bottom Sheet -->
     <div class="bottom-sheet" id="actionSheet">
       <div class="handle-bar"></div>
@@ -149,24 +154,26 @@
         <!-- 이모지 기반 렌더링 영역으로 개편 -->
         <div id="modalEmoji" class="emoji-display">🍔</div>
 
-        <h3 class="modal-title">결과 타이틀 <i class="ph-fill ph-check-circle" style="color:var(--color-primary-green)"></i></h3>
+        <h3 class="modal-title">결과 타이틀 <i class="ph-fill ph-check-circle" style="color:var(--color-primary-green)"></i>
+        </h3>
         <div class="score-circle">
           <span class="score">0</span>
           <span class="label">점</span>
         </div>
         <p class="modal-desc">결과 설명 영역</p>
-        
+
         <div class="expert-card">
           <div class="expert-title">✨ 전문가 한마디</div>
           <p class="expert-text">전문가 피드백 영역</p>
         </div>
-        
+
         <!-- 하단 3종 버튼 세로 정렬 -->
         <div class="modal-buttons">
           <button class="btn btn-primary" id="btnRecordMeal">식단 기록하기</button>
           <button class="btn btn-outline" id="btnViewRecipe">레시피 보기</button>
           <button class="btn btn-outline" id="btnRecommendFood">관련 음식 보기</button>
-          <button class="btn btn-outline modal-close" style="border: none; color: var(--text-muted); margin-top: 4px;">닫기</button>
+          <button class="btn btn-outline modal-close"
+            style="border: none; color: var(--text-muted); margin-top: 4px;">닫기</button>
         </div>
       </div>
     </div>
@@ -195,4 +202,5 @@
 
   <script src="js/app.js"></script>
 </body>
+
 </html>
